@@ -27,18 +27,22 @@ public class GlobalErrorHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<GeneralResponse> idErrorHandler(Exception e) {
+        log.error(e.getClass().descriptorString());
         log.error(e.getMessage());
+        log.error(e.getLocalizedMessage());
         return GeneralResponse.getResponse(HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<GeneralResponse> emptyBody(Exception e) {
+        log.error(e.getClass().descriptorString());
         log.error(e.getMessage());
         return GeneralResponse.getResponse(HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ResponseEntity<GeneralResponse> validationHandler(HandlerMethodValidationException e) {
+        log.error(e.getClass().descriptorString());
         log.error(e.getMessage());
         return GeneralResponse.getResponse(HttpStatus.BAD_REQUEST);
     }
@@ -57,6 +61,8 @@ public class GlobalErrorHandler {
 
     @ExceptionHandler(MissingRequestHeaderException.class)
     public ResponseEntity<GeneralResponse> validationHandler(Exception e) {
+        log.error(e.getClass().descriptorString());
+        log.error(e.getMessage());
         return GeneralResponse.getResponse(HttpStatus.BAD_REQUEST);
     }
 

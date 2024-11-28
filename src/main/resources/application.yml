@@ -15,3 +15,7 @@ jwt:
 server:
   servlet:
     context-path: /marvelpedia
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [${PID}] ---  %-40.40logger{0} : %m%n"

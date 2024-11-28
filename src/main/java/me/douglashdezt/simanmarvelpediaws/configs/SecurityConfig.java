@@ -29,11 +29,6 @@ public class SecurityConfig {
     private final UserService userService;
     private final JWTFilter filter;
 
-    @Bean
-    public ModelMapper getMapper() {
-        return new ModelMapper();
-    }
-
     public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService, JWTFilter filter) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;

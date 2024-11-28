@@ -8,14 +8,9 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SaveUserDTO {
-    @Email
+public class LoginDTO {
     @NotBlank
     private String email;
     @NotBlank
-    @Pattern(
-            regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[#%$^&!])[A-Za-z\\d#%$^&!]{8,32}$",
-            message = "must be at least one Capital Letter, one normal letter, a number and a symbol of !#$%^&"
-    )
     private String password;
 }

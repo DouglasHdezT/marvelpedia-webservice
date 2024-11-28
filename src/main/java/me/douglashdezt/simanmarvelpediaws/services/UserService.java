@@ -9,5 +9,5 @@ public interface UserService {
     User findUserByEmail(String email);
     User findAuthenticated();
 
-    boolean verifyPassword(User email, String password);
+    boolean verifyPassword(User user, String password);
 }

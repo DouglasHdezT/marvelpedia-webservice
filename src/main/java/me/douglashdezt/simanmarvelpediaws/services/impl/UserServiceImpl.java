@@ -6,8 +6,10 @@ import me.douglashdezt.simanmarvelpediaws.dtos.SaveUserDTO;
 import me.douglashdezt.simanmarvelpediaws.models.User;
 import me.douglashdezt.simanmarvelpediaws.repositories.UserRepository;
 import me.douglashdezt.simanmarvelpediaws.services.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,14 +17,21 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
     }
 
     @Transactional(rollbackOn = Exception.class)
     @Override
     public void createUser(SaveUserDTO info) {
-
+        User user = modelMapper.map(info, User.class);
+        user.setPassword(passwordEncoder.encode(info.getPassword()));
+        userRepository.save(user);
     }
 
     @Override
@@ -41,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean verifyPassword(User email, String password) {
-        return false;
+    public boolean verifyPassword(User user, String password) {
+        return passwordEncoder.matches(password, user.getPassword());
     }
 }

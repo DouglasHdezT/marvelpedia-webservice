@@ -4,6 +4,7 @@ package me.douglashdezt.simanmarvelpediaws.configs;
 import jakarta.servlet.http.HttpServletResponse;
 import me.douglashdezt.simanmarvelpediaws.models.User;
 import me.douglashdezt.simanmarvelpediaws.services.UserService;
+import me.douglashdezt.simanmarvelpediaws.utils.CorsFilter;
 import me.douglashdezt.simanmarvelpediaws.utils.JWTFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -97,6 +99,7 @@ public class SecurityConfig {
         }));
 
         //JWT filter
+        http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -7,6 +7,7 @@ import me.douglashdezt.simanmarvelpediaws.services.UserService;
 import me.douglashdezt.simanmarvelpediaws.utils.JWTFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -61,6 +62,7 @@ public class SecurityConfig {
 
         //Route filter
         http.authorizeHttpRequests(auth -> auth
+            .requestMatchers(HttpMethod.OPTIONS).permitAll()
             .requestMatchers(
                     "/api/auth/login", "/api/auth/register", "/api/health-check"
             ).permitAll()

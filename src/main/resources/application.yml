@@ -12,3 +12,6 @@ spring:
 jwt:
   secret: ${JWTSECRET}
   exp-time: 86400000 #24 Horas
+server:
+  servlet:
+    context-path: /marvelpedia

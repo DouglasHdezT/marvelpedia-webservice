@@ -24,6 +24,7 @@ public class ComicServiceImpl implements ComicService {
             MarvelResponse<MarvelComic> response =  comicRepository.getAllComics(limit, offset);
             return response.getCode() == 200 ? response.getData(): null;
         } catch (Exception e) {
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -34,6 +35,7 @@ public class ComicServiceImpl implements ComicService {
             MarvelResponse<MarvelComic> response =  comicRepository.getComicsByName(name, limit, offset);
             return response.getCode() == 200 ? response.getData(): null;
         } catch (Exception e) {
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -51,6 +53,7 @@ public class ComicServiceImpl implements ComicService {
             }
             return null;
         } catch (Exception e) {
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -61,6 +64,7 @@ public class ComicServiceImpl implements ComicService {
             MarvelResponse<MarvelCharacter> response =  comicRepository.getCharactersByComic(id, limit, offset);
             return response.getCode() == 200 ? response.getData(): null;
         } catch (Exception e) {
+            log.error(e.getMessage());
             return null;
         }
     }

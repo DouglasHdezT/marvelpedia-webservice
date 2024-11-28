@@ -19,7 +19,7 @@ public interface ComicRepository {
 
     @GetMapping("/comics")
     MarvelResponse<MarvelComic> getComicsByName(
-            @RequestParam(name = "nameStartsWith") String nameStartsWith,
+            @RequestParam(name = "titleStartsWith") String nameStartsWith,
             @RequestParam(name = "limit", defaultValue = "10") int limit,
             @RequestParam(name = "offset", defaultValue = "0") int offset
     );

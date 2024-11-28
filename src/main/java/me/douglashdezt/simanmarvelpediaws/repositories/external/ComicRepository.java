@@ -19,7 +19,7 @@ public interface ComicRepository {
     );
 
     @GetMapping("/comics/{id}")
-    MarvelResponse<MarvelComic> getCharactersById(@PathVariable String id);
+    MarvelResponse<MarvelComic> getComicsById(@PathVariable String id);
 
     @GetMapping("/comics/{id}/characters")
     MarvelResponse<MarvelCharacter> getCharactersByComic(

@@ -5,23 +5,24 @@ import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.MarvelPaginationInfo;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.MarvelResponse;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelCharacter;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelComic;
-import me.douglashdezt.simanmarvelpediaws.repositories.external.CharacterRepository;
-import me.douglashdezt.simanmarvelpediaws.services.CharacterService;
+import me.douglashdezt.simanmarvelpediaws.repositories.external.ComicRepository;
+import me.douglashdezt.simanmarvelpediaws.services.ComicService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class CharacterServiceImpl implements CharacterService {
-    private final CharacterRepository characterRepository;
+public class ComicServiceImpl implements ComicService {
+    private final ComicRepository comicRepository;
 
-    public CharacterServiceImpl(CharacterRepository characterRepository) {
-        this.characterRepository = characterRepository;
+    public ComicServiceImpl(ComicRepository comicRepository) {
+        this.comicRepository = comicRepository;
     }
 
     @Override
-    public MarvelPaginationInfo<MarvelCharacter> findCharactersByName(String name, int limit, int offset) {
+    public MarvelPaginationInfo<MarvelComic> findComicsByName(String name, int limit, int offset) {
         try {
-            MarvelResponse<MarvelCharacter> response = characterRepository.getCharactersByName(name, limit, offset);
+            MarvelResponse<MarvelComic> response =  comicRepository.getComicsByName(name, limit, offset);
             return response.getCode() == 200 ? response.getData(): null;
         } catch (Exception e) {
             return null;
@@ -29,11 +30,11 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public MarvelCharacter findCharactersById(String id) {
+    public MarvelComic findComicById(String id) {
         try {
-            MarvelResponse<MarvelCharacter> response = characterRepository.getCharactersById(id);
+            MarvelResponse<MarvelComic> response = comicRepository.getComicsById(id);
             if (response.getCode() == 200) {
-                MarvelPaginationInfo<MarvelCharacter> paginationInfo = response.getData();
+                MarvelPaginationInfo<MarvelComic> paginationInfo = response.getData();
 
                 if (paginationInfo.getResults() != null && !paginationInfo.getResults().isEmpty()) {
                     return paginationInfo.getResults().get(0);
@@ -46,9 +47,9 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public MarvelPaginationInfo<MarvelComic> findComicsByCharacterId(String id, int limit, int offset) {
+    public MarvelPaginationInfo<MarvelCharacter> findCharactersByComicId(String id, int limit, int offset) {
         try {
-            MarvelResponse<MarvelComic> response = characterRepository.getComicsByCharacter(id, limit, offset);
+            MarvelResponse<MarvelCharacter> response =  comicRepository.getCharactersByComic(id, limit, offset);
             return response.getCode() == 200 ? response.getData(): null;
         } catch (Exception e) {
             return null;

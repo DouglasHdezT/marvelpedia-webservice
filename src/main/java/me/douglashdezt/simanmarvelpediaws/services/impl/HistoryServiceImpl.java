@@ -18,11 +18,9 @@ import java.util.List;
 @Slf4j
 public class HistoryServiceImpl implements HistoryService {
     private final SearchHistoryRepository searchHistoryRepository;
-    private final UserService userService;
 
-    public HistoryServiceImpl(SearchHistoryRepository searchHistoryRepository, UserService userService) {
+    public HistoryServiceImpl(SearchHistoryRepository searchHistoryRepository) {
         this.searchHistoryRepository = searchHistoryRepository;
-        this.userService = userService;
     }
 
     @Override

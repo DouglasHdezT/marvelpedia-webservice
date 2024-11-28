@@ -19,7 +19,9 @@ public class SearchHistory {
     private String model;
     private String type;
     private String search;
+    @Column(name = "limit_value")
     private int limit;
+    @Column(name = "offset_value")
     private int offset;
     private String timestamp;
 

@@ -5,6 +5,8 @@ import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.MarvelPaginationInfo;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelCharacter;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelComic;
 import me.douglashdezt.simanmarvelpediaws.services.CharacterService;
+import me.douglashdezt.simanmarvelpediaws.services.HistoryService;
+import me.douglashdezt.simanmarvelpediaws.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/data/characters")
 public class CharacterController {
     private final CharacterService characterService;
+    private final HistoryService historyService;
+    private final UserService userService;
 
-    public CharacterController(CharacterService characterService) {
+    public CharacterController(CharacterService characterService, HistoryService historyService, UserService userService) {
         this.characterService = characterService;
+        this.historyService = historyService;
+        this.userService = userService;
     }
 
     @GetMapping("/by-name")
@@ -30,6 +36,9 @@ public class CharacterController {
             return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Characters not found");
         }
 
+        historyService.save(
+                userService.findAuthenticated(), "characters", "by-name", name, limit, offset
+        );
         return GeneralResponse.getResponse(HttpStatus.OK, "Characters found", characters);
     }
 
@@ -41,6 +50,9 @@ public class CharacterController {
             return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Character not found");
         }
 
+        historyService.save(
+                userService.findAuthenticated(), "characters", "by-id", id, 0, 0
+        );
         return GeneralResponse.getResponse(HttpStatus.OK, "Character found", character);
     }
 
@@ -55,6 +67,9 @@ public class CharacterController {
             return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Comics not found");
         }
 
+        historyService.save(
+                userService.findAuthenticated(), "comics", "by-character", id, limit, offset
+        );
         return GeneralResponse.getResponse(HttpStatus.OK, "Comics found", comics);
     }
 }

@@ -3,6 +3,7 @@ package me.douglashdezt.simanmarvelpediaws.controllers;
 import me.douglashdezt.simanmarvelpediaws.dtos.GeneralResponse;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.MarvelPaginationInfo;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelCharacter;
+import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelComic;
 import me.douglashdezt.simanmarvelpediaws.services.CharacterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class CharacterController {
         MarvelPaginationInfo<MarvelCharacter> characters = characterService.findCharactersByName(name, limit, offset);
 
         if(characters == null) {
-            return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Character not found");
+            return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Characters not found");
         }
 
         return GeneralResponse.getResponse(HttpStatus.OK, "Characters found", characters);
@@ -41,5 +42,19 @@ public class CharacterController {
         }
 
         return GeneralResponse.getResponse(HttpStatus.OK, "Character found", character);
+    }
+
+    @GetMapping("/{id}/comics")
+    public ResponseEntity<GeneralResponse> findComicsByCharacterId(@PathVariable String id,
+            @RequestParam(value = "limit", defaultValue = "10") int limit,
+            @RequestParam(value = "offset", defaultValue = "0") int offset
+    ) {
+        MarvelPaginationInfo<MarvelComic> comics = characterService.findComicsByCharacterId(id, limit, offset);
+
+        if(comics  == null) {
+            return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Comics not found");
+        }
+
+        return GeneralResponse.getResponse(HttpStatus.OK, "Comics found", comics);
     }
 }

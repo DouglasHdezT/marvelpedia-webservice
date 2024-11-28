@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "marvel-character-client", url = "${webservices.marvel}", configuration = MarvelFeignConfiguration.class)
-public interface CharacterRepository {
-    @GetMapping("/characters")
-    MarvelResponse<MarvelCharacter> getCharactersByName(
+@FeignClient(name = "marvel-comics-client", url = "${webservices.marvel}", configuration = MarvelFeignConfiguration.class)
+public interface ComicRepository {
+    @GetMapping("/comics")
+    MarvelResponse<MarvelComic> getComicsByName(
             @RequestParam(name = "nameStartsWith") String nameStartsWith,
             @RequestParam(name = "limit", defaultValue = "10") int limit,
             @RequestParam(name = "offset", defaultValue = "0") int offset
     );
 
-    @GetMapping("/characters/{id}")
-    MarvelResponse<MarvelCharacter> getCharactersById(@PathVariable String id);
+    @GetMapping("/comics/{id}")
+    MarvelResponse<MarvelComic> getCharactersById(@PathVariable String id);
 
-    @GetMapping("/characters/{id}/comics")
-    MarvelResponse<MarvelComic> getComicsByCharacter(
+    @GetMapping("/comics/{id}/characters")
+    MarvelResponse<MarvelCharacter> getCharactersByComic(
             @PathVariable String id,
             @RequestParam(name = "limit", defaultValue = "10") int limit,
             @RequestParam(name = "offset", defaultValue = "0") int offset

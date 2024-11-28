@@ -62,7 +62,7 @@ public class SecurityConfig {
 
         //Route filter
         http.authorizeHttpRequests(auth -> auth
-            .requestMatchers(HttpMethod.OPTIONS).permitAll()
+            .requestMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
             .requestMatchers(
                     "/api/auth/login", "/api/auth/register", "/api/health-check"
             ).permitAll()

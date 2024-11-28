@@ -69,6 +69,6 @@ public class GlobalErrorHandler {
     @ExceptionHandler(FeignException.class)
     public ResponseEntity<GeneralResponse> feignError(FeignException e) {
         log.error(e.getMessage());
-        return GeneralResponse.getResponse(HttpStatus.OK);
+        return GeneralResponse.getResponse(HttpStatus.I_AM_A_TEAPOT);
     }
 }

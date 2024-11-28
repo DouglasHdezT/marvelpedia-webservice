@@ -15,7 +15,12 @@ jwt:
 server:
   servlet:
     context-path: /marvelpedia
-
+webservices:
+  marvel: https://gateway.marvel.com/v1/public
+keys:
+  marvel:
+    public: ${MARVELPUBLIC}
+    private: ${MARVELPRIVATE}
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [${PID}] ---  %-40.40logger{0} : %m%n"

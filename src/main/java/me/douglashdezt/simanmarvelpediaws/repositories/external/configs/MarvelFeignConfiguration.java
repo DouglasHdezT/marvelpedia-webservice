@@ -43,7 +43,7 @@ public class MarvelFeignConfiguration {
                 template.query("hash", hash);
                 template.query("apikey", publicKey);
 
-                log.info(template.toString());
+//                log.info(template.toString());
         };
     }
 

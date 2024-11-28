@@ -24,7 +24,19 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public MarvelPaginationInfo<MarvelCharacter> findCharactersById(int id, int limit, int offset) {
-        return null;
+    public MarvelCharacter findCharactersById(String id) {
+        try {
+            MarvelResponse<MarvelCharacter> response = characterRepository.getCharactersById(id);
+            if (response.getCode() == 200) {
+                MarvelPaginationInfo<MarvelCharacter> paginationInfo = response.getData();
+
+                if (paginationInfo.getResults() != null && !paginationInfo.getResults().isEmpty()) {
+                    return paginationInfo.getResults().get(0);
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

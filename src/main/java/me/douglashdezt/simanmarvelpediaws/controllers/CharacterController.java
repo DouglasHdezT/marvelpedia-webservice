@@ -6,10 +6,7 @@ import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelCharacter;
 import me.douglashdezt.simanmarvelpediaws.services.CharacterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/data/characters")
@@ -33,5 +30,16 @@ public class CharacterController {
         }
 
         return GeneralResponse.getResponse(HttpStatus.OK, "Characters found", characters);
+    }
+
+    @GetMapping("/by-id/{id}")
+    public ResponseEntity<GeneralResponse> findCharactersById(@PathVariable String id) {
+        MarvelCharacter character = characterService.findCharactersById(id);
+
+        if(character == null) {
+            return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Character not found");
+        }
+
+        return GeneralResponse.getResponse(HttpStatus.OK, "Character found", character);
     }
 }

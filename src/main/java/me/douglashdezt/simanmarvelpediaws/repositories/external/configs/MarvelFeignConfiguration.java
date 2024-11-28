@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.UUID;
 
 @Slf4j

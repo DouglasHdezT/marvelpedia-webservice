@@ -7,7 +7,6 @@ import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelCharacter;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelComic;
 import me.douglashdezt.simanmarvelpediaws.repositories.external.ComicRepository;
 import me.douglashdezt.simanmarvelpediaws.services.ComicService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

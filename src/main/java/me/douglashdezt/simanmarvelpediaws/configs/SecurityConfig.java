@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import me.douglashdezt.simanmarvelpediaws.models.User;
 import me.douglashdezt.simanmarvelpediaws.services.UserService;
 import me.douglashdezt.simanmarvelpediaws.utils.JWTFilter;
-import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

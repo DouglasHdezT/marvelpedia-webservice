@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/data/characters")
+@CrossOrigin("*")
 public class CharacterController {
     private final CharacterService characterService;
     private final HistoryService historyService;

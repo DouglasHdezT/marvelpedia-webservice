@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/data/series")
+@CrossOrigin("*")
 public class SeriesController {
     private final SeriesService seriesService;
     private final HistoryService historyService;

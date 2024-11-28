@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/search-history")
+@CrossOrigin("*")
 public class HistoryController {
     private final HistoryService historyService;
     private final UserService userService;

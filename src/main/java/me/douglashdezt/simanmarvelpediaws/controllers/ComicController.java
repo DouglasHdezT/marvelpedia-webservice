@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/data/comics")
+@CrossOrigin("*")
 public class ComicController {
     private final ComicService comicService;
     private final HistoryService historyService;

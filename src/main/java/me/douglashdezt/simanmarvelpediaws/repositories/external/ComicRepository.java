@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "marvel-comics-client", url = "${webservices.marvel}", configuration = MarvelFeignConfiguration.class)
 public interface ComicRepository {
     @GetMapping("/comics")
+    MarvelResponse<MarvelComic> getAllComics(
+            @RequestParam(name = "limit", defaultValue = "10") int limit,
+            @RequestParam(name = "offset", defaultValue = "0") int offset
+    );
+
+    @GetMapping("/comics")
     MarvelResponse<MarvelComic> getComicsByName(
             @RequestParam(name = "nameStartsWith") String nameStartsWith,
             @RequestParam(name = "limit", defaultValue = "10") int limit,

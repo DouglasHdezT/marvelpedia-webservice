@@ -20,7 +20,7 @@ public class CharacterController {
 
     @GetMapping("/by-name")
     public ResponseEntity<GeneralResponse> findCharactersByName(
-            @RequestParam("name") String name,
+            @RequestParam(value = "name", defaultValue = "") String name,
             @RequestParam(value = "limit", defaultValue = "10") int limit,
             @RequestParam(value = "offset", defaultValue = "0") int offset
         ) {

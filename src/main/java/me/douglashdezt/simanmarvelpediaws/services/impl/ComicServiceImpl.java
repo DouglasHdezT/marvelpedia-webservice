@@ -19,6 +19,16 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
+    public MarvelPaginationInfo<MarvelComic> findAllComics(int limit, int offset) {
+        try {
+            MarvelResponse<MarvelComic> response =  comicRepository.getAllComics(limit, offset);
+            return response.getCode() == 200 ? response.getData(): null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
     public MarvelPaginationInfo<MarvelComic> findComicsByName(String name, int limit, int offset) {
         try {
             MarvelResponse<MarvelComic> response =  comicRepository.getComicsByName(name, limit, offset);

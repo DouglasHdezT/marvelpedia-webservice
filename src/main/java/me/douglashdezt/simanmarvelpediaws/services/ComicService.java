@@ -5,6 +5,7 @@ import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelCharacter;
 import me.douglashdezt.simanmarvelpediaws.dtos.marvelapi.models.MarvelComic;
 
 public interface ComicService {
+    MarvelPaginationInfo<MarvelComic> findAllComics(int limit, int offset);
     MarvelPaginationInfo<MarvelComic> findComicsByName(String name, int limit, int offset);
     MarvelComic findComicById(String id);
 
